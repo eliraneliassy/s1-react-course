@@ -1,5 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import styles from './app.module.scss';
 import { DB } from './db';
 import Greeting from './greeting/greeting';
@@ -10,7 +10,7 @@ export function App() {
   //const posts: Post[] = DB;
   // const likes: Post[] = [];
 
-  const [posts, setPosts] = useState<Post[]>(DB);
+  const [posts, setPosts] = useState<Post[]>([]);
   const [likes, setLikes] = useState<Post[]>([]);
 
   const likeHandler = (post: Post) => {
@@ -23,6 +23,15 @@ export function App() {
 
     return index > -1;
   };
+
+  const getPosts = async () => {
+    const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
+    setPosts(await res.json());
+  };
+
+  useEffect(() => {
+    getPosts();
+  }, []);
   return (
     <>
       <h1>Welcome to Facebook</h1>
