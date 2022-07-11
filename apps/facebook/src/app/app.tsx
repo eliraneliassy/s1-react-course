@@ -21,6 +21,7 @@ import { AppState } from './store/app.state';
 import { AuthGuard } from '@s1/guards';
 import Login from './login/login';
 import { createContext } from 'vm';
+import Register from './register/register';
 
 export function App() {
   //const posts: Post[] = DB;
@@ -61,6 +62,7 @@ export function App() {
 
       <Routes>
         <Route path="login" element={<Login></Login>}></Route>
+        <Route path="register" element={<Register></Register>}></Route>
 
         <Route element={<AuthGuard isAuth={true} />}>
           <Route
