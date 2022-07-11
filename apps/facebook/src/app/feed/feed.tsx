@@ -1,6 +1,7 @@
-import { useState, useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect, useContext } from 'react';
 import { Post } from '../post.interface';
 import PostCmp from '../post/post';
+import { AppContext } from '../store/app.context';
 import styles from './feed.module.css';
 
 /* eslint-disable-next-line */
@@ -8,6 +9,8 @@ export interface FeedProps {}
 
 export function Feed(props: FeedProps) {
   const [posts, setPosts] = useState<Post[]>([]);
+
+  const ctx = useContext(AppContext);
 
   const getPosts = useCallback(async () => {
     const res = await fetch(`https://jsonplaceholder.typicode.com/posts`);
@@ -18,11 +21,15 @@ export function Feed(props: FeedProps) {
     getPosts();
   }, [getPosts]);
 
-  // const isLiked = (post: Post): boolean => {
-  //   const index = likes.findIndex((p) => p.id === post.id);
+  const isLiked = (post: Post): boolean => {
+    const index = ctx.likes.findIndex((p) => p.id === post.id);
 
-  //   return index > -1;
-  // };
+    return index > -1;
+  };
+
+  const likeHandler = (post: Post) => {
+    ctx.addLike(post);
+  }
 
   return (
     <>
@@ -32,8 +39,8 @@ export function Feed(props: FeedProps) {
         <PostCmp
           post={post}
           key={post.id}
-          // onLike={likeHandler}
-          // isLiked={isLiked(post)}
+          onLike={likeHandler}
+          isLiked={isLiked(post)}
         />
       ))}
     </>

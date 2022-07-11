@@ -16,13 +16,16 @@ export function App() {
   //const posts: Post[] = DB;
   // const likes: Post[] = [];
 
-  const [likes, setLikes] = useState<Post[]>([]);
-  const [appState, setAppState] = useState<AppState>({ likes: [] });
-
-  const likeHandler = (post: Post) => {
-    setLikes((currentLikes: Post[]) => [...currentLikes, post]);
-    console.log('like handler in app cmp', likes);
+  const addLike = (post: Post) => {
+    setAppState((currentState: AppState) => ({
+      ...currentState,
+      likes: [...currentState.likes, post],
+    }));
   };
+
+  const [appState, setAppState] = useState<AppState>({ likes: [], addLike });
+
+  console.log('render');
 
   return (
     <AppContext.Provider value={appState}>
