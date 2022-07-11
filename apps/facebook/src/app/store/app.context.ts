@@ -4,5 +4,7 @@ import { Post } from '../post.interface';
 
 export const AppContext = createContext<AppState>({
     likes: [],
-    addLike: (post: Post) => { return; }
+    addLike: (post: Post) => { return; },
+    isAuth: false,
+    setIsAuth: (isAuth: boolean) => { return; }
 });

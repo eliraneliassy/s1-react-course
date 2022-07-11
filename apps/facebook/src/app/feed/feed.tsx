@@ -28,7 +28,7 @@ export function Feed(props: FeedProps) {
   };
 
   const likeHandler = (post: Post) => {
-    ctx.addLike(post);
+    ctx.likes = [...ctx.likes, post]
   }
 
   return (

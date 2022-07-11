@@ -1,4 +1,5 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
+
 import React, { useEffect, useState, useCallback } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import styles from './app.module.scss';
@@ -11,6 +12,8 @@ import { Post } from './post.interface';
 import PostCmp from './post/post';
 import { AppContext } from './store/app.context';
 import { AppState } from './store/app.state';
+import { AuthGuard } from '@s1/guards';
+import Login from './login/login';
 
 export function App() {
   //const posts: Post[] = DB;
@@ -23,7 +26,19 @@ export function App() {
     }));
   };
 
-  const [appState, setAppState] = useState<AppState>({ likes: [], addLike });
+  const setIsAuth = (isAuth: boolean) => {
+    setAppState((currentState: AppState) => ({
+      ...currentState,
+      isAuth,
+    }));
+  };
+
+  const [appState, setAppState] = useState<AppState>({
+    likes: [],
+    addLike,
+    isAuth: false,
+    setIsAuth,
+  });
 
   console.log('render');
 
@@ -36,7 +51,10 @@ export function App() {
 
       <Routes>
         <Route path="" element={<Feed></Feed>}></Route>
-        <Route path="my-likes" element={<MyLikes></MyLikes>}></Route>
+        <Route path="login" element={<Login></Login>}></Route>
+        <Route element={<AuthGuard isAuth={false} />}>
+          <Route path="my-likes" element={<MyLikes></MyLikes>}></Route>
+        </Route>
       </Routes>
     </AppContext.Provider>
   );

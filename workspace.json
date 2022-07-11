@@ -3,6 +3,7 @@
   "version": 2,
   "projects": {
     "facebook": "apps/facebook",
-    "facebook-e2e": "apps/facebook-e2e"
+    "facebook-e2e": "apps/facebook-e2e",
+    "guards": "libs/guards"
   }
 }

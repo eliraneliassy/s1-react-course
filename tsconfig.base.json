@@ -14,7 +14,9 @@
     "skipLibCheck": true,
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
-    "paths": {}
+    "paths": {
+      "@s1/guards": ["libs/guards/src/index.ts"]
+    }
   },
   "exclude": ["node_modules", "tmp"]
 }
