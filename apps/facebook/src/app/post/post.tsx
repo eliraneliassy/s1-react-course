@@ -5,7 +5,7 @@ export interface PostProps {
   post: Post;
   onLike?: (post: Post) => void;
   onUnlike?: (post: Post) => void;
-  isLiked: boolean;
+  isLiked?: boolean;
 }
 
 export function PostCmp(props: PostProps) {
