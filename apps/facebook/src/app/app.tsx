@@ -1,10 +1,16 @@
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 
-import React, { useEffect, useState, useCallback } from 'react';
+import React, {
+  useEffect,
+  useState,
+  useCallback,
+  useContext,
+  Suspense,
+} from 'react';
 import { Route, Routes } from 'react-router-dom';
 import styles from './app.module.scss';
 import { DB } from './db';
-import Feed from './feed/feed';
+
 import Greeting from './greeting/greeting';
 import Header from './header/header';
 import MyLikes from './my-likes/my-likes';
@@ -14,10 +20,13 @@ import { AppContext } from './store/app.context';
 import { AppState } from './store/app.state';
 import { AuthGuard } from '@s1/guards';
 import Login from './login/login';
+import { createContext } from 'vm';
 
 export function App() {
   //const posts: Post[] = DB;
   // const likes: Post[] = [];
+
+  const Feed = React.lazy(() => import('./feed/feed'));
 
   const addLike = (post: Post) => {
     setAppState((currentState: AppState) => ({
@@ -27,6 +36,7 @@ export function App() {
   };
 
   const setIsAuth = (isAuth: boolean) => {
+    console.log('setISAuth', isAuth);
     setAppState((currentState: AppState) => ({
       ...currentState,
       isAuth,
@@ -47,12 +57,20 @@ export function App() {
       <Header />
       <h1>Welcome to Facebook</h1>
 
-      <Greeting />
+      {/* <Greeting /> */}
 
       <Routes>
-        <Route path="" element={<Feed></Feed>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
-        <Route element={<AuthGuard isAuth={false} />}>
+
+        <Route element={<AuthGuard isAuth={true} />}>
+          <Route
+            path=""
+            element={
+              <Suspense fallback={<div>loading...</div>}>
+                <Feed></Feed>
+              </Suspense>
+            }
+          ></Route>
           <Route path="my-likes" element={<MyLikes></MyLikes>}></Route>
         </Route>
       </Routes>
