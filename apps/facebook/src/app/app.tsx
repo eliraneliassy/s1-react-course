@@ -22,6 +22,7 @@ import { AuthGuard } from '@s1/guards';
 import Login from './login/login';
 import { createContext } from 'vm';
 import Register from './register/register';
+import Counter from './counter/counter';
 
 export function App() {
   //const posts: Post[] = DB;
@@ -61,6 +62,7 @@ export function App() {
       {/* <Greeting /> */}
 
       <Routes>
+        <Route path="counter" element={<Counter></Counter>}></Route>
         <Route path="login" element={<Login></Login>}></Route>
         <Route path="register" element={<Register></Register>}></Route>
 

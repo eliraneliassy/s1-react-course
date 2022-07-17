@@ -1,6 +1,7 @@
 import { useFormik } from 'formik';
 import styles from './register.module.css';
 import * as Yup from 'yup';
+import { useRef } from 'react';
 
 /* eslint-disable-next-line */
 export interface RegisterProps {}
@@ -27,6 +28,12 @@ export function Register(props: RegisterProps) {
     validationSchema
   });
   console.log(formik.values);
+
+
+  const passwordRef= useRef<HTMLInputElement>(null);
+
+  
+
   return (
     <form onSubmit={formik.handleSubmit}>
       <div>
@@ -44,7 +51,7 @@ export function Register(props: RegisterProps) {
 
       <div>
         <label>Password:</label>
-        <input type="password" placeholder="Password"></input>
+        <input type="password" placeholder="Password" ref={passwordRef}></input>
       </div>
 
       <button type="submit" disabled={!formik.isValid}>Login</button>
