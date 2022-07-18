@@ -15,7 +15,9 @@
     "skipDefaultLibCheck": true,
     "baseUrl": ".",
     "paths": {
-      "@s1/guards": ["libs/guards/src/index.ts"]
+      "@s1/components": ["libs/ui-components/src/index.ts"],
+      "@s1/guards": ["libs/guards/src/index.ts"],
+      "@s1/hooks": ["libs/hooks/src/index.ts"]
     }
   },
   "exclude": ["node_modules", "tmp"]

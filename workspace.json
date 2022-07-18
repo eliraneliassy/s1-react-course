@@ -4,6 +4,9 @@
   "projects": {
     "facebook": "apps/facebook",
     "facebook-e2e": "apps/facebook-e2e",
-    "guards": "libs/guards"
+    "guards": "libs/guards",
+    "hooks": "libs/hooks",
+    "ui-components": "libs/ui-components",
+    "ui-components-e2e": "apps/ui-components-e2e"
   }
 }
